@@ -1,6 +1,43 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../model/usermodel");
+const Customer = require("../model/customer_model");
+const Teacher = require("../model/teacher_model");
+
+
+//get back all the teacher
+router.get("/teacher", async (req, res) => {
+  try {
+  const retriveTeacher = await  Teacher.find();
+  // res.json({result:retriveCustomer});
+  res.json(retriveTeacher);
+  console.log(retriveTeacher);
+  } catch(err) {
+    res.json({message: err});
+  }
+
+  //console.log("post");
+  //res.send("post url");
+});
+
+
+
+//get back all the customers
+router.get("/customer", async (req, res) => {
+  try {
+  const retriveCustomer = await  Customer.find();
+  // res.json({result:retriveCustomer});
+  res.json(retriveCustomer);
+  console.log(retriveCustomer);
+  } catch(err) {
+    res.json({message: err});
+  }
+
+  //console.log("post");
+  //res.send("post url");
+});
+
+
 
 //update Select and unselect options
 
