@@ -20,6 +20,9 @@ app.use(bodyParser.json());
 const userRoute = require('./router/userroute');
 app.use('/user', userRoute );
 
+const studentRoute = require('./router/studentroute');
+app.use('/student', studentRoute );
+
 
 
 app.get('/',(req, res) =>{
