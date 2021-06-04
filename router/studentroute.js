@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const express = require("express");
 const router = express.Router();
 const stuData = require("../model/studentinfo");
@@ -8,18 +9,35 @@ router.get("/", async (req, res) => {
         const data = await stuData.aggregate(
             [
                 {
-                    $lookup: 
+                    $lookup:
                     {
-                      from: "teachers",
-                      localField: "class",
-                      foreignField: "cls",
-                      as : "haha"  
-                    }  
-                  }
+                        from: "teachers",
+                        localField: "class",
+                        foreignField: "cls",
+                        as: "haha"
+                    }
+                }
             ]
         )
 
-        res.json(data);
+        var sum = 0;
+        sum = data[0].bangla + data[0].math + 10;
+        console.log(sum);
+
+        const updateOneStudent = await stuData.updateOne(
+            { _id: data[0]._id },
+            { $set: { marks: sum } }
+        );
+
+        console.log(updateOneStudent);
+
+        const updated_data = await stuData.find(
+            {},
+            { marks: 1 }
+        ).limit(1);
+
+        res.json({ updated_data, data });
+
 
     } catch (err) {
         res.json({ message: err });
