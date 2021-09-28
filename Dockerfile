@@ -1,15 +1,7 @@
-FROM node:latest
-
-RUN mkdir -p /usr/src/app
-
+FROM node:14.15.4
 WORKDIR /usr/src/app
-
-COPY package.json .
-
+COPY package*.json ./
 RUN npm install
-
-COPY ./ .
-
+COPY . .
 EXPOSE 3006
-
-CMD ["npm","start"]
+CMD [ "npm", "start"]

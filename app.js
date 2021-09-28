@@ -23,6 +23,9 @@ app.use('/user', userRoute);
 const studentRoute = require('./router/studentroute');
 app.use('/student', studentRoute);
 
+const essRouter = require('./router/ess.router');
+app.use('/ess', essRouter);
+
 
 
 app.get('/', (req, res) => {
@@ -47,6 +50,10 @@ app.get('/', (req, res) => {
 // };
 
 // connectDB();
+
+mongoose.connect(process.env.DB_CONNECTION,{useNewUrlParser:true, useUnifiedTopology: true } , () =>
+ console.log('connected to database test ')
+ );
 
 
 

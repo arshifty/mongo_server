@@ -1,18 +1,8 @@
-version: '3.7'
+version: "3"
 services:
-  nodejs-api:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+  app:
+    container_name: web
+    restart: always
+    build: .
     ports:
-      - "3006:3006"
-    container_name: nodejs-api
-    links:
-      - mongo-db
-  mongo-db:
-    image: mongo
-    ports:
-      - "27017:27017"
-    container_name: mongo-db
-    volumes:
-      - ./db/:/data/db
+      - 3006:3006
